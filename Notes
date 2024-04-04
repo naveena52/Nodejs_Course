@@ -116,3 +116,71 @@ addition of key values will not effect the execution of the code
 ** NodeJs must be installed in laptop
 > go inside folder using terminal/cmd
 > npm i packagename/ npm install packagename
+
+package-lock : 
+> Dependency tree for the dependencies that are installed in the package.json 
+
+node_modules :
+> Contains all the packages you have installed in the project
+
+.gitignore :
+> What all things we don't want to push to git
+npm i package@2.5.4
+
+package-lock > Dependency tree
+node_modules > Contains all the packages you have installed
+.gitignore > What all things we dont want to push to git
+
+local dependency
+> Default installation
+> they are local to the folder
+> only used for specific folder
+
+global dependency
+> installed in the laptop
+> can be used for any app
+> only used before app start
+> use to generate the app / run the app
+> will not add in package.json
+> need admin permission to install
+
+dev dependency
+> they are local to the folder
+> only dependencies used at time of development
+
+/* Step Generate to install dev dependency */
+** NodeJs must be installed in laptop
+> go inside folder using terminal/cmd
+> npm i packagename --save-dev
+
+callback in node :
+A callback in Node is a non-blocking function that executes upon task completion, enabling asynchronous processing. It facilitates scalability by allowing Nodejs to handle multiple requests without waiting for operations to conclude, as exemplified in file I/O scenarios.
+
+/////Step to install global package
+#window
+> open cmd as admin
+> npm i -g nodemon
+
+#mac /linux
+> open terminal
+> sudo npm i -g nodemon
+.env file importance :
+application will be run on mutliple servers like [dev,test,prod] for different applications
+different port numbers will be opened and if we give any static number like port=3000 in one application
+then rest of the other applications can not use the same port right bz that port is not opened for that application so that's the reason .env come into exist
+>with the help .env variable  we can configure the port and many other sensitive data separately for different applications like .env.dev -->for dev application ,.env.test etc.,
+>A/c to the application we will configure them to their respective application
+
+Es5
+Ecma Script
+Es6
+Ecma Script
+
+var a = 10
+"my age is "+a
+"my age is 10"
+
+
+var a = 10
+`my age is ${a}`
+"my age is 10"
