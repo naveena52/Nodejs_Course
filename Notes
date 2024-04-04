@@ -184,3 +184,19 @@ var a = 10
 var a = 10
 `my age is ${a}`
 "my age is 10"
+
+appbk1.js : Why Express router?
+IN ths file we make the route for category and products which will work fine but when we create the 
+details route under the category and products with same name [Mutliple route under the one route title] it will fetch the data by first in first out basis which is not a good approach as a developers 
+>> To over come the above we using the next level concept Express Router
+
+Express Router :
+With this we can create the multiple route under the one route title
+
+ Middleware :
+ These are the supporting libraries which help to more things to done for us in similar pattern
+ we can maintain the logs of the applications by using middleware known as margon 
+
+EJS :
+stands for Embedded JavaScript Template 
+it will 
