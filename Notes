@@ -1,30 +1,43 @@
+
+Tools :
 https://code.visualstudio.com/ >> Install
 https://nodejs.org/en >> Install
 https://git-scm.com/downloads >> Install
 https://github.com/ >> Create Account
-https://github.com/Aakashdeveloper >> Follow
 
+extension
+> vscode-icons
+> githistory
+> gitlens
+> spellcheck
+> Eslint
+> Tabnine
+
+Chorme
+> Json-viewer
+(https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh)
+
+Course Content :
 NPM
 Basic NodeJS(in built)(Os,file,http)
 NodeJS(full Stack App) (Node-EJs-Mongo-Express)
 Third Party Api (Weather Api)
 Redis  > 6379
-//////////////////////////
+Node-Es6(.babel)
+RedisWithMongo
 ImageUpload
 ImageUpload(formidable)
-RedisWithMongo
-Node-Es6(.babel)
+Email With Node(nodemailer)
 MongoDb Basic >27017  (local/cloud)
 Zomato App backend
 Api with NodeJS(Rest)>1
-Github
 Swagger
-Testing
 DashBoard(Crud)
+Testing
+Github
 --Deployment of app---
 render
 Pm2
-Docker
 Nginx
 Jenkins
 Login/Logout(JWT)
@@ -34,15 +47,72 @@ GraphQl API
 Paytm-Payment
 Oauth(with google)
 NodeJs with postgres
-Email With Node(nodemailer)
 Chatapp
-FIREBASE
---------NOT---------
-React/Angular
-Html/css/jquery
-
-microservice(aws lambda)
 upload to s3 bucket
+FIREBASE (npm i -g firebase)
+Docker
+GitActions
+microservice(aws lambda)
 
+Introduction :
 NodeJs
-> Single Thread, Async, Non Block I/O
+> Single Thread, Async, Non Blocking I/O
+>advantage of nodejs over java :
+In java for mutliple thread were required for multiple request
+will be difficult for maintaining the mutliple threads for garbage collector 
+But in the nodejs single thread will be dealing with multiple requests so that 
+we can conclude nodejs doesn't had any non-blocking and it is single thread,async and non-blocking I/O framework
+It is open-source and makes javascript to run outside the browser runtime environment
+
+Security vulnaribility :
+Global and local company repos will be in between that security scanners . By Scanning the packages from global repos
+and then only sent to local company repos with in installed packages of company repos also undergone the scanning process 
+for achieving more security without any block when deploying them.
+Npm :
+> node package manager
+
+2,348,877 number of packages will be and the number will be changed over time
+
+Nexes repo
+
+JSON
+> JavaScript Object Notation
+> Way to represent data
+> Key value
+[
+    {
+        "name":"John",
+        "city":"Amsterdam"
+    },
+    {
+        "name":"Nikita",
+        "city":"London"
+    },
+    {
+        "name":"Amar",
+        "city":"Pune",
+        "age":10
+    }
+]
+It will work fine with two or more than two key values to the previous key values that means for one object 
+there are two key values but for the third object there is addition of age key value eventhough with unstructured
+addition of key values will not effect the execution of the code 
+
+///package.json
+> Entry point to app
+> Contains packages used in app
+> Script (start,test)
+> Meta Data (name,version,description)
+
+/* Step Generate to generate package.json */
+** NodeJs must be installed in laptop
+> go inside folder using terminal/cmd
+> npm init
+> Answer all questions
+> type yes
+>directly npm init -y - we can skip all the above questions
+
+/* Step Generate to install package */
+** NodeJs must be installed in laptop
+> go inside folder using terminal/cmd
+> npm i packagename/ npm install packagename
