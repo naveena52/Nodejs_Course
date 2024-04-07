@@ -200,3 +200,25 @@ With this we can create the multiple route under the one route title
 EJS :
 stands for Embedded JavaScript Template 
 it will 
+
+The different ways to pass the data from  one route to another route or from one path to another path
+they are : [In 3 ways Params, QueryParams, Body.]
+
+Params
+> What we pass after /
+> Need to define in route
+> If defined than compulsary to pass
+> Should be use for find results
+>It is mainly used for passing one or two values only so, if there is more than 2 then we need to
+use the QueryParams to pass the values
+
+QueryParams
+> What we pass after ?
+> No need to define in router
+> Should be use for the filter data
+
+Body
+> what we pass from form 
+
+Note :
+What ever the data that will come from param and Query Param will always be in the form of String

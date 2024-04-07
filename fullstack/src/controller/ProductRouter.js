@@ -30,6 +30,17 @@ function router(menu)
             })
         
     })    
+    productRouter.route('/category/:id')
+        .get(function(req,res){
+            //let id = req.params.id
+            let {id} = req.params;
+            mongodb.connect(url,function(err,dc){
+                let dbobj = dc.db('nodeDb');
+                   dbobj.collection('products').find({category_id:Number(id)}).toArray(function(err,results){
+                   res.render('products',{title:'Products Page',data:results,menu})
+                })
+            }) 
+        })
 
     productRouter.route('/details')
         .get((req,res) => 
