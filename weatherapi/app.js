@@ -2,6 +2,9 @@ let express = require('express');
 let request = require('request');
 let port = process.env.PORT || 7660;
 let app = express();
+app.use(express.static(__dirname+'/public'));
+app.set('views','./src/views');
+app.set('view engine','ejs');
 
 app.get('/weather',(req,res) => {
     let city = req.query.city?req.query.city:'Delhi'
@@ -9,7 +12,9 @@ app.get('/weather',(req,res) => {
     // calling api
     request(url,(err,response) => {
         if(err) throw err;
-        res.send(response.body)
+        //res.send(response.body)
+        const output = JSON.parse(response.body);
+        res.render('index',{title:'Weather App',result:output})
     })
 })
 
