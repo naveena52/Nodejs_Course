@@ -42,10 +42,19 @@ function router(menu)
             }) 
         })
 
-    productRouter.route('/details')
-        .get((req,res) => 
+    productRouter.route('/details/:id')
+        .get(function(req,res) 
     {
-        res.send('Product Details')
+        let {id} = req.params;
+        mongodb.connect(url,function(err,dc){
+            let dbobj = dc.db('nodeDb');
+            dbobj.collection('products').find({id:Number(id)}).toArray(function(err,results){
+               console.log("this is produt details",results,menu)
+               res.render('Products',{title:'Product Details',data:results,menu}) 
+
+            })
+        })
+       
     })
     return productRouter
 }
