@@ -1,0 +1,22 @@
+{
+  "name": "rediswithmongo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start":"nodemon start.js",
+    "dev":"nodemon start.js"
+  },
+  "keywords": [],
+  "author": "Naveena",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
+    "@babel/register": "^7.23.7",
+    "express": "^4.19.2",
+    "mongodb": "^5.2.0",
+    "nodemon": "^3.1.0",
+    "redis": "^4.6.13"
+  }
+}
