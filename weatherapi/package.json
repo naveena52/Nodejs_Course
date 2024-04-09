@@ -4,12 +4,15 @@
   "description": "This is a weather app",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev":"nodemon app.js"
+    "start": "node app1.js",
+    "dev": "nodemon start.js"
   },
   "author": "Naveena",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
+    "@babel/register": "^7.23.7",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
     "nodemon": "^3.1.0",

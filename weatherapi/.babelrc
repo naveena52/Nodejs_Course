@@ -1,0 +1,7 @@
+//here we set the environment so that the code will be babel compatible for the backward
+{
+    "presets":
+     [
+        "@babel/preset-env"
+     ]
+}
