@@ -1,13 +1,14 @@
 let express = require ('express');
-let mongo = require ('mongo');
+let mongo = require ('mongodb');
 let dotenv = require ('dotenv');
 dotenv.config()
 let app = express();
 let MongoClient = mongo.MongoClient;
 let port = process.env.PORT;
 let cors = require('cors');
-let bodyParser = require ('body-parse');
-let db=db;
+let bodyParser = require ('body-parser');
+let mongoUrl = process.env.MongoUrl;
+let db;
 
 
 app.use(bodyParser.urlencoded({extended:true}));
