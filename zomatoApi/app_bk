@@ -1,16 +1,16 @@
-let express = require('express');
-let app = express();
-let mongo = require('mongodb');
-let dotenv  = require('dotenv');
+let express = require ('express');
+let mongo = require ('mongodb');
+let dotenv = require ('dotenv');
 dotenv.config()
-let bodyParser = require('body-parser');
-let cors = require('cors');
+let app = express();
+let MongoClient = mongo.MongoClient;
 let port = process.env.PORT;
+let cors = require('cors');
+let bodyParser = require ('body-parser');
+let mongoUrl = process.env.MongoUrl;
 let db;
 let authKey = process.env.AuthKey
-let {getData,getDatawithsortlimit,postData
-    ,dbconnect,updateData,deleteData} = require('./controller/dbController');
-
+let {getData,getDatawithsortlimit} = require('./controller/ApiController');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
@@ -23,12 +23,10 @@ function auth(key){
     }
 }
 
-
 // get heart beat
 app.get('/',(req,res) => {
     res.status(200).send('Health ok')
 })
-
 //List of city
 app.get('/location',(req,res) => {
     let key = req.header('x-basic-token')
@@ -63,18 +61,19 @@ app.get('/restaurants',async (req,res) => {
     let collection = 'restaurants'
     let output = await getData(db,collection,query)
     res.send(output)
-    // db.collection('restaurants').find(query).toArray((err,data) => {
-    //     res.status(200).send(data)
-    // })
-})
-
+    //db.collection('restaurants').find(query).toArray((err,data) => {
+        //res.status(200).send(data)
+    })
 
 //list of meals
 app.get('/meals',async(req,res) => {
     let query = {}
     let collection = 'mealType'
-    let output = await getData(collection,query)
+    let output = await getData(db,collection,query)
     res.send(output)
+    // let output = await getData(collection,query)
+    // console.log(">>>output",output)
+    // res.send(output)
 })
 
 //filters
@@ -125,7 +124,7 @@ app.get('/details/:id',async (req,res) => {
     let _id = mongo.ObjectId(req.params.id)
     let query = {_id:_id}
     let collection = 'restaurants'
-    let output = await getData(collection,query)
+    let output = await getData(db,collection,query)
     res.send(output)
 })
 
@@ -134,41 +133,8 @@ app.get('/menu/:id',async (req,res) => {
     let id = Number(req.params.id)
     let query = {restaurant_id:id}
     let collection = 'menu'
-    let output = await getData(collection,query)
+    let output = await getData(db,collection,query)
     res.send(output)
-})
-
-//placeOrder
-app.post('/placeOrder',async(req,res) => {
-    let data = req.body;
-    let collection = 'orders'
-    let response = await postData(collection,data)
-    res.send(response)
-})
-
-//menu details {"id":[4,6,12]}
-app.post('/menuDetails',async(req,res) => {
-    if(Array.isArray(req.body.id)){
-       let query = {menu_id:{$in:req.body.id}}
-       let collection = 'menu'
-       let output = await getData(collection,query)
-       res.send(output)
-    }else{
-        res.send('Plese pass data as array like {"id":[4,6,12]}')
-    }
-})
-
-//updateOrder
-app.put('/updateOrder',async (req,res) => {
-    let collection = 'orders';
-    let condition = {"_id":mongo.ObjectId(req.body._id)}
-    let data = {
-            $set:{
-                "status":req.body.status
-            }
-    }
-    let response = await updateData(collection,condition,data)
-    res.send(response)
 })
 
 //order
@@ -178,26 +144,13 @@ app.get('/orders',async(req,res) => {
         query={email:req.query.email}
     }
     let collection = 'orders'
-    let output = await getData(collection,query)
+    let output = await getData(db,collection,query)
     res.send(output)
 })
-
-
-//delete order
-app.delete('/deleteOrder',async(req,res)=>{
-    let collection = 'orders';
-    let query = {"_id":mongo.ObjectId(req.body._id)}
-    let rowCount = await getData(collection,query);
-    console.log(">>>rowCount",rowCount)
-    if(rowCount.length > 0){
-     let response = await deleteData(collection,query)
-     res.send(response)
-    }else{
-        res.send('No Order Found')
-    }
-})
-
-app.listen(port,() => {
-    dbconnect()
-    console.log(`Running on port ${port}`)
+MongoClient.connect(mongoUrl,{useNewUrlParser:true},(err,client) => {
+    if(err) console.log(`Error While connecting to mongo`);
+    db =client.db('restaurant');
+    app.listen(port,() => {
+        console.log(`Running on port ${port}`)
+    })
 })
