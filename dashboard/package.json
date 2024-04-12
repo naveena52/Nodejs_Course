@@ -1,11 +1,13 @@
 {
   "name": "dashboard",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node apiwithoutui.js",
-    "dev": "nodemon apiwithoutui.js"
+    "dev": "nodemon apiwithoutui.js",
+    "ui":"nodemon apiwithui.js",
+    "test": "mocha --timeout 20000"
   },
   "author": "Naveena",
   "license": "ISC",
@@ -19,8 +21,8 @@
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
-    "chai": "^5.1.0",
-    "chai-http": "^4.4.0",
-    "mocha": "^10.4.0"
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0"
   }
 }

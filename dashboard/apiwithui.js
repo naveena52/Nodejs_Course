@@ -17,6 +17,11 @@ const package = require('./package.json');
 
 swaggerDocument.info.version = package.version;
 app.use('/api-doc',swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
+app.use(express.static(__dirname+'/public'))
+app.set('views','./src/views');
+app.set('view engine','ejs');
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
@@ -25,10 +30,31 @@ app.get('/health',(req,res)=>{
     res.send('Health Ok')
 })
 
+app.get('/',async(req,res) => {
+    const output = [];
+    const cursor = collection.find();
+    for await (const doc of cursor){
+        output.push(doc)
+    }
+    cursor.closed;
+    res.render('index',{data:output})
+})
+
+app.get('/new',(req,res) => {
+    res.render('forms')
+})
+
 //insert user
 app.post('/addUser',async(req,res) => {
-    await collection.insertOne(req.body);
-    res.send('Data Added')
+    let data = {
+        name:req.body.name,
+        city:req.body.city,
+        phone:req.body.phone,
+        role:req.body.role?req.body.role:'User',
+        isActive:true
+    }
+    await collection.insertOne(data);
+    res.redirect('/')
 })
 
 //get users
@@ -86,7 +112,7 @@ app.get('/user/:id',async (req,res) => {
 //update user
 app.put('/updateUser',async(req,res) => {
     await collection.updateOne(
-        {_id:new Mongo.ObjectId(req.params.id)},
+        {_id:new Mongo.ObjectId(req.body._id)},
         {
             $set:{
                 name:req.body.name,
@@ -99,8 +125,18 @@ app.put('/updateUser',async(req,res) => {
     )
     res.send('Record Updated')
 })
+
+/* Delete User */
+app.delete('/deleteUser',async(req,res) => {
+    await collection.deleteOne({
+        _id:new Mongo.ObjectId(req.body._id)
+    })
+    res.send('User Deleted')
+})
+
+
 //softdelete user
-app.put('/deactivteUser',async(req,res) => {
+app.put('/deactivateUser',async(req,res) => {
     await collection.updateOne(
         {_id:new Mongo.ObjectId(req.body._id)},
         {
@@ -113,7 +149,7 @@ app.put('/deactivteUser',async(req,res) => {
 })
 
 //softdelete user
-app.put('/activteUser',async(req,res) => {
+app.put('/activateUser',async(req,res) => {
     await collection.updateOne(
         {_id:new Mongo.ObjectId(req.body._id)},
         {
