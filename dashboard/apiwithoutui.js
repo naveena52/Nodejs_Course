@@ -56,7 +56,7 @@ app.get('/users',async(req,res) => {
         }
         query = {isActive}
     }else{
-        query = {}
+        query = {isActive:true}
     }
     const cursor = collection.find(query);
     for await (const data of cursor){
@@ -94,13 +94,30 @@ app.put('/updateUser',async(req,res) => {
     )
     res.send('Record Updated')
 })
+//softdelete user
+app.put('/deactivteUser',async(req,res) => {
+    await collection.updateOne(
+        {_id:new Mongo.ObjectId(req.body._id)},
+        {
+            $set:{
+                isActive: false  
+            }
+        }
+    )
+    res.send('User Deactivated')
+})
 
-/* Delete User */
-app.delete('/deleteUser',async(req,res) => {
-    await collection.deleteOne({
-        _id:new Mongo.ObjectId(req.body._id)
-    })
-    res.send('User Deleted')
+//softdelete user
+app.put('/activteUser',async(req,res) => {
+    await collection.updateOne(
+        {_id:new Mongo.ObjectId(req.body._id)},
+        {
+            $set:{
+                isActive: true  
+            }
+        }
+    )
+    res.send('User Activated')
 })
 
 app.listen(port,() => {
